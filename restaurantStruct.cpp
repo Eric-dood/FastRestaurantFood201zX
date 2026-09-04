@@ -22,26 +22,34 @@ int main()
 {
     //Set up the restaurant setup
     Restaurant myRest = initializeRestaurant();
+    //Print out the whole myRest structure
     outputRestaurant(myRest);
 }
 
+//Initialize trueOrFalse() this is used for 
 bool trueOrFalse()
 {
+    //Define a temporary variable which will be used for returning
     char input;
+    //Do a while(true) validation loop 
     while (true)
     {
+        //Ask the user to do a input
         cin >> input;
         cin.ignore(1000, 10);
+        //Convert the input character to lowercase
         input = tolower(input);
+        //If the user inputted a letter that is not Y or N, ask the user to try again
         if (input != 'y' && input != 'n')
             cout << "ERROR: Y / N only! Try again: ";
-        else
+        else //Otherwise break the loop itself...
             break;
     }
-
+    //...and return the boolean; if the input is 'y', the boolean is true and if the input is 'n', the boolean is false.
     return (input == 'y') ? true : false;
 }
 
+//Initialize the function initializeRestaurant() which is used for the creation of a Restaurant struct through user-input
 Restaurant initializeRestaurant()
 {
     //Initialize the temporary variable
