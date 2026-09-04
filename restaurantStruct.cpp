@@ -24,6 +24,31 @@ int main()
     Restaurant myRest = initializeRestaurant();
     //Print out the whole myRest structure
     outputRestaurant(myRest);
+
+    //Try to print out four structs with using a file input
+    Restaurant col[4];
+    ifstream file;
+    //Also initialize the separate variables related to the file method
+    string file_name, file_address;
+    int file_numTables;
+    bool file_outsideSpots, file_hasBathroom;
+    int index = 0;
+    //Open the input file
+    file.open("input.txt");
+    //If the file isn't available or in a good state, throw a I/O error
+    if (!file.good()) throw "I/O error";
+    else //Otherwise continue as normal
+    {
+        //Check if the file is open
+        if (file.is_open())
+        {
+            while (getline(file, file_name))
+            {
+                file.ignore();
+                getline(file, file_address);
+            }
+        }
+    }
 }
 
 //Initialize trueOrFalse() this is used for 
