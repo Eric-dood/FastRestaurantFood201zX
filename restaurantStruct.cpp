@@ -13,6 +13,7 @@ struct Restaurant
 
 //Define all prototype functions here
 bool trueOrFalse();
+void outputRestaurant(const Restaurant&);
 Restaurant initializeRestaurant();
 
 
@@ -21,6 +22,7 @@ int main()
 {
     //Set up the restaurant setup
     Restaurant myRest = initializeRestaurant();
+    outputRestaurant(myRest);
 }
 
 bool trueOrFalse()
@@ -62,4 +64,19 @@ Restaurant initializeRestaurant()
     t.hasBathroom = trueOrFalse();
     //Return the temporary variable
     return t;
+}
+
+//Initialize outputRestautant(): it prints out the restaurant's information.
+void outputRestaurant(const Restaurant &t)
+{
+    //Print out the name
+    cout << "\t- Name: " << t.name << endl;
+    //Print out the location
+    cout << "\t- Address: " << t.address << endl;
+    //Print out the number of tables
+    cout << "\t- Name: " << t.numTables << endl;
+    //Print out the spot
+    cout << "\t- Has Outside Tables: " << ((t.outsideSpots) ? "Yes" : "No") << endl;
+    //Print out the name
+    cout << "\t- Has Bathroom: " << ((t.hasBathroom) ? "Yes" : "No") << endl;
 }
