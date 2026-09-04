@@ -1,20 +1,20 @@
+10
 Restaurant Uno
 Random Place
-10
 no
 yes
+8
 Restaurant Dos
 San Ramon
-8
 yes
 no
+0
 Restaurant III
 ???
-0
 no
 no
+6
 Restaurant 4
 San Mateo
-6
 yes
 yes

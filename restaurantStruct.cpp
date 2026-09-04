@@ -32,9 +32,9 @@ int main()
     ifstream file;
 
     //Also initialize the separate variables related to the file method
-    string file_name, file_address;
+    string file_name, file_address, line;
     int file_numTables;
-    bool file_outsideSpots, file_hasBathroom;
+    string file_outsideSpots, file_hasBathroom;
     int index = 0;
 
     //Open the input file
@@ -44,15 +44,15 @@ int main()
     if (file.is_open())
     {
         //Use a while loop to go through all of the lines
-        while (getline(file, file_name))
+        while (file >> file_numTables)
         {
-            //Ignore the first one since it's being used for scanning through names
-            file.ignore();
-            //Get the address
-            getline(file, file_address);
-            //Get the number of tables
-            file >> file_numTables;
-            
+            file.ignore(); //Ignore the first line since it's being used for file_numTables
+            //Get the rest of the four variables
+            getline(file, file_name); //Get the address
+            getline(file, file_address); //Get the address
+            file >> file_outsideSpots; //Get the outside spot check
+            file >> file_hasBathroom; //Get the bathroom check
+
             //NOTE: The boolean variables are usually done while the temporary restaurant structure is defined,
             //so when the variables gathered from the file are added to the t struct, the booleans are automatically
             //going to get defined whether file_outsideSpots or file_hasBathroom are either written as 'yes' (true) or 'no' (false)
@@ -62,8 +62,8 @@ int main()
             t.name = file_name;
             t.address = file_address;
             t.numTables = file_numTables;
-            t.outsideSpots = (file_outsideSpots = "yes") ? true : false;
-            t.hasBathroom = (file_hasBathroom = "yes") ? true : false;
+            t.outsideSpots = (file_outsideSpots == "yes") ? true : false;
+            t.hasBathroom = (file_hasBathroom == "yes") ? true : false;
 
             //Store the t struct into the col[] array & add up the index
             col[index++] = t;
@@ -89,7 +89,7 @@ bool trueOrFalse()
 {
     //Define a temporary variable which will be used for returning
     char input;
-    
+
     //Do a while(true) validation loop 
     while (true)
     {
@@ -141,7 +141,7 @@ void outputRestaurant(const Restaurant &t)
     //Print out the location
     cout << "\t- Address: " << t.address << endl;
     //Print out the number of tables
-    cout << "\t- Name: " << t.numTables << endl;
+    cout << "\t- Number of tables: " << t.numTables << endl;
     //Print out the spot
     cout << "\t- Has Outside Tables: " << ((t.outsideSpots) ? "Yes" : "No") << endl;
     //Print out the name
