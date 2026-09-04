@@ -1,0 +1,5 @@
+Restaurant Uno
+Random Place
+10
+no
+yes

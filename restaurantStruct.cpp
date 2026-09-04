@@ -26,7 +26,8 @@ int main()
     outputRestaurant(myRest);
 
     //Try to print out four structs with using a file input
-    Restaurant col[4];
+    const int MAX_NUM = 4;
+    Restaurant col[MAX_NUM];
     ifstream file;
     //Also initialize the separate variables related to the file method
     string file_name, file_address;
@@ -46,8 +47,26 @@ int main()
             {
                 file.ignore();
                 getline(file, file_address);
+                file >> file_numTables;
+
+                Restaurant t;
+                t.name = file_name;
+                t.address = file_address;
+                t.numTables = file_numTables;
+                t.outsideSpots = (file_outsideSpots = "yes") ? true : false;
+                t.hasBathroom = (file_hasBathroom = "yes") ? true : false;
+
+                col[index++] = t;
             }
         }
+    }
+
+    //Print out the four Restaurant structs
+    for (int i = 0; i < MAX_NUM; i++)
+    {
+        cout << "Restaurant #" << i+1 << ": " << endl;
+        outputRestaurant(col[i]);
+        cout << endl;
     }
 }
 
