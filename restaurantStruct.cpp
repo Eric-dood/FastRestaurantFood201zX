@@ -17,11 +17,12 @@ void outputRestaurant(const Restaurant&);
 Restaurant initializeRestaurant();
 
 
-//Start of the main function
+//Start of the main() function
 int main()
 {
     //Set up the restaurant setup
     Restaurant myRest = initializeRestaurant();
+
     //Print out the whole myRest structure
     outputRestaurant(myRest);
 
@@ -29,52 +30,66 @@ int main()
     const int MAX_NUM = 4;
     Restaurant col[MAX_NUM];
     ifstream file;
+
     //Also initialize the separate variables related to the file method
     string file_name, file_address;
     int file_numTables;
     bool file_outsideSpots, file_hasBathroom;
     int index = 0;
+
     //Open the input file
     file.open("input.txt");
-    //If the file isn't available or in a good state, throw a I/O error
-    if (!file.good()) throw "I/O error";
-    else //Otherwise continue as normal
+
+    //Check if the file is open
+    if (file.is_open())
     {
-        //Check if the file is open
-        if (file.is_open())
+        //Use a while loop to go through all of the lines
+        while (getline(file, file_name))
         {
-            while (getline(file, file_name))
-            {
-                file.ignore();
-                getline(file, file_address);
-                file >> file_numTables;
+            //Ignore the first one since it's being used for scanning through names
+            file.ignore();
+            //Get the address
+            getline(file, file_address);
+            //Get the number of tables
+            file >> file_numTables;
+            
+            //NOTE: The boolean variables are usually done while the temporary restaurant structure is defined,
+            //so when the variables gathered from the file are added to the t struct, the booleans are automatically
+            //going to get defined whether file_outsideSpots or file_hasBathroom are either written as 'yes' (true) or 'no' (false)
+           
+            //Use a temporary Restaurant structure to store all of the file input variables
+            Restaurant t;
+            t.name = file_name;
+            t.address = file_address;
+            t.numTables = file_numTables;
+            t.outsideSpots = (file_outsideSpots = "yes") ? true : false;
+            t.hasBathroom = (file_hasBathroom = "yes") ? true : false;
 
-                Restaurant t;
-                t.name = file_name;
-                t.address = file_address;
-                t.numTables = file_numTables;
-                t.outsideSpots = (file_outsideSpots = "yes") ? true : false;
-                t.hasBathroom = (file_hasBathroom = "yes") ? true : false;
-
-                col[index++] = t;
-            }
+            //Store the t struct into the col[] array & add up the index
+            col[index++] = t;
         }
     }
 
     //Print out the four Restaurant structs
+    cout << endl;
     for (int i = 0; i < MAX_NUM; i++)
     {
+        //Print out the restaurant number
         cout << "Restaurant #" << i+1 << ": " << endl;
+        //Print out the parts of the structure as usual
         outputRestaurant(col[i]);
+        //Use a endl to leave some extra space for the next restaurant number
         cout << endl;
     }
 }
+//End of the main() function
 
 //Initialize trueOrFalse() this is used for 
 bool trueOrFalse()
 {
     //Define a temporary variable which will be used for returning
     char input;
+    
     //Do a while(true) validation loop 
     while (true)
     {

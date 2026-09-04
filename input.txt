@@ -3,3 +3,18 @@ Random Place
 10
 no
 yes
+Restaurant Dos
+San Ramon
+8
+yes
+no
+Restaurant III
+???
+0
+no
+no
+Restaurant 4
+San Mateo
+6
+yes
+yes
